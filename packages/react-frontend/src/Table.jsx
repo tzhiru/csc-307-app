@@ -4,7 +4,8 @@ function TableHeader() {
     <thead>
       <tr>
         <th>Name</th>
-        <th>Job</th>
+        <th>Class</th>
+		<th>Subclass</th>
       </tr>
     </thead>
   );
@@ -14,7 +15,8 @@ function TableBody(props) {
     return (
       <tr key={index}>
   <td>{row.name}</td>
-  <td>{row.job}</td>
+  <td>{row.c}</td>
+  <td>{row.sc}</td>
   <td>
     <button onClick={() => props.removeCharacter(index)}>
       Delete
