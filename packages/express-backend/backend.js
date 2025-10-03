@@ -15,11 +15,8 @@ app.listen(port, () => {
   );
 });
 
-app.get("/users", (req, res) => {
-  res.send(users);
-});
-
 const findName = (name) => {
+	//console.log("Name");
 	return users["users_list"].filter(
 	(user) => user["name"] === name
 	);
@@ -31,10 +28,12 @@ const findID = (id) =>
 app.get("/users", (req, res) => {
 	const name = req.query.name;
 	if (name != undefined){
+		//console.log("Found");
 		let result = findName(name);
 		result = { users_list: result };
 		res.send(result);
 	}else{
+		//console.log("Else");
 		res.send(users);	
 	}
 });
