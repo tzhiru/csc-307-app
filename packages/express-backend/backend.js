@@ -19,6 +19,36 @@ app.get("/users", (req, res) => {
   res.send(users);
 });
 
+const findName = (name) => {
+	return users["users_list"].filter(
+	(user) => user["name"] === name
+	);
+};
+
+const findID = (id) => 
+	users["users_list"].find((user) => user["id"] === id);
+
+app.get("/users", (req, res) => {
+	const name = req.query.name;
+	if (name != undefined){
+		let result = findName(name);
+		result = { users_list: result };
+		res.send(result);
+	}else{
+		res.send(users);	
+	}
+});
+
+app.get("/users/:id", (req, res) => {
+	const id = req.params.id
+	let result = findID(id);
+	if (result === undefined){
+		res.status(404).send("Resource not found.");
+	}else{
+		res.send(result);
+	}
+});
+
 const users = {
   users_list: [
     {
