@@ -25,7 +25,7 @@ app.post("/users", (req, res) => {
 	console.log("post user");
 	const toAdd = req.body;
 	addUser(toAdd);
-	res.send;
+	res.status(200).send("User added");
 });
 
 const findName = (name) => {
@@ -75,7 +75,8 @@ app.delete("/users/:id", (req, res) => {
 		res.status(404).send("User not found.");
 	}else{
 		//res.send(result);
-		users = users.filter( (user) => user["id"] !== id);
+		const updated = users['users_list'].filter( (user) => user["id"] !== id);
+		users['users_list'] = updated;
 		console.log("delete successful");
 		res.status(200).send("User deleted.");
 	}
