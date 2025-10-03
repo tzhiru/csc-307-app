@@ -65,22 +65,22 @@ app.get("/users", (req, res) => {
 		res.send(users);	
 	}
 });
-/*
+
 app.delete("/users/:id", (req, res) => {
 	console.log("Delete call");
 	const id = req.params.id
 	let result = findID(id);
 	if (result === undefined){
-		res.status(404).send("User not found.");
 		console.log("delete failed");
+		res.status(404).send("User not found.");
 	}else{
 		//res.send(result);
 		users = users.filter( (user) => user["id"] !== id);
-		res.status(200).send("User deleted.");
 		console.log("delete successful");
+		res.status(200).send("User deleted.");
 	}
 });
-*/
+
 const findID = (id) => 
 	users["users_list"].find((user) => user["id"] === id);
 	
