@@ -15,6 +15,19 @@ app.listen(port, () => {
   );
 });
 
+const addUser = (user) => {
+	console.log("addUser");
+	users["users_list"].push(user);
+	return user;
+}
+
+app.post("/users", (req, res) => {
+	console.log("post user");
+	const toAdd = req.body;
+	addUser(toAdd);
+	res.send;
+});
+
 const findName = (name) => {
 	//console.log("Name");
 	return users["users_list"].filter(
@@ -22,22 +35,55 @@ const findName = (name) => {
 	);
 };
 
-const findID = (id) => 
-	users["users_list"].find((user) => user["id"] === id);
+const findJob = (job) => {
+	return users["users_list"].filter(
+	(user) => user["job"] === job
+	);
+};
 
 app.get("/users", (req, res) => {
 	const name = req.query.name;
-	if (name != undefined){
+	const job = req.query.job;
+	if (name != undefined && job != undefined){
 		//console.log("Found");
+		//let found = findName(name);
+		//found = { users_list: found };
+		//let result = findJob(job);
+		//result = { found : result }
+		let result = findName(name).filter((user) => user["job"] === job);
+		//result = found.filter((user) => user["job"] === job);
+		res.send(result);
+	}else if(name != undefined && job === undefined){
 		let result = findName(name);
 		result = { users_list: result };
 		res.send(result);
-	}else{
-		//console.log("Else");
+	}else if(name === undefined && job != undefined){
+		let result = findJob(job);
+		result = { users_list: result };
+		res.send(result);
+	}else{	
 		res.send(users);	
 	}
 });
-
+/*
+app.delete("/users/:id", (req, res) => {
+	console.log("Delete call");
+	const id = req.params.id
+	let result = findID(id);
+	if (result === undefined){
+		res.status(404).send("User not found.");
+		console.log("delete failed");
+	}else{
+		//res.send(result);
+		users = users.filter( (user) => user["id"] !== id);
+		res.status(200).send("User deleted.");
+		console.log("delete successful");
+	}
+});
+*/
+const findID = (id) => 
+	users["users_list"].find((user) => user["id"] === id);
+	
 app.get("/users/:id", (req, res) => {
 	const id = req.params.id
 	let result = findID(id);
