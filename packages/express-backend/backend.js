@@ -19,6 +19,8 @@ app.listen(port, () => {
 
 const addUser = (user) => {
 	console.log("addUser");
+	let newId = (Math.floor(Math.random()*1000000)).toString();
+	user.id = newId;
 	users["users_list"].push(user);
 	return user;
 }
@@ -47,13 +49,7 @@ app.get("/users", (req, res) => {
 	const name = req.query.name;
 	const job = req.query.job;
 	if (name != undefined && job != undefined){
-		//console.log("Found");
-		//let found = findName(name);
-		//found = { users_list: found };
-		//let result = findJob(job);
-		//result = { found : result }
 		let result = findName(name).filter((user) => user["job"] === job);
-		//result = found.filter((user) => user["job"] === job);
 		res.send(result);
 	}else if(name != undefined && job === undefined){
 		let result = findName(name);
