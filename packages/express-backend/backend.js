@@ -29,7 +29,9 @@ app.post("/users", (req, res) => {
 	console.log("post user");
 	const toAdd = req.body;
 	addUser(toAdd);
-	res.status(201).send("User added");
+	let added = findName(toAdd.name);
+	if (added === undefined){res.status(400).send("Add user failed.");}
+	else res.status(201).send(added);
 });
 
 const findName = (name) => {
@@ -76,7 +78,7 @@ app.delete("/users/:id", (req, res) => {
 		const updated = users['users_list'].filter( (user) => user["id"] !== id);
 		users['users_list'] = updated;
 		console.log("delete successful");
-		res.status(200).send("User deleted.");
+		res.status(204).send("User deleted.");
 	}
 });
 

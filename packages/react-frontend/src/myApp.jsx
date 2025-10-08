@@ -6,7 +6,18 @@ function MyApp() {
 	
 	const [characters, setCharacters] = useState([]);
 	
-	function removeOneCharacter(index) {
+	/*function removeOneCharacter(id) {
+		const promise = fetch(`http://localhost:8000/:${id}`,{
+			method: "DELETE"
+		});
+		promise.then(() => {
+			fetchUsers()
+				.then((res) => res.json())
+				.then((json) => setCharacters(json["users_list"]));
+				//.catch((error) => {console.log(error);})
+		});
+    }*/
+  function removeOneCharacter(index) {
 		const updated = characters.filter((character, i) => {
 			return i !== index;
     });
@@ -14,7 +25,16 @@ function MyApp() {
   }
 	function updateList(person) {
 		//only update the table if POST call succeeds
+		console.log(updateList);
 		postUser(person)
+		.then((response) => {
+			if(response.status != 201){
+				console.error("Post failed");
+				throw new Error(response.json());
+			}else{
+				return response.json();
+			}
+		})
 		.then(() => setCharacters([...characters, person]))
 		.catch((error) => {console.log(error);})
 	}
@@ -35,7 +55,7 @@ function MyApp() {
 			method: "POST",
 			headers: {"Content-Type": "application/json",},
 			body: JSON.stringify(person),});
-    return promise;
+		return promise;
   }
 	
 	return (
