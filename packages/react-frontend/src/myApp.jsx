@@ -53,6 +53,7 @@ function MyApp() {
 	}, []);
 	
 	function postUser(person) {
+		console.log("post");
 		const promise = fetch("Http://localhost:8000/users", {
 			method: "POST",
 			headers: {"Content-Type": "application/json",},

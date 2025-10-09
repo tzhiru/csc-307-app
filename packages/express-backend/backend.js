@@ -30,6 +30,7 @@ app.post("/users", (req, res) => {
 	const toAdd = req.body;
 	addUser(toAdd);
 	let added = findName(toAdd.name);
+	//console.log(added);
 	if (added === undefined){res.status(400).send("Add user failed.");}
 	else res.status(201).send(added);
 });
@@ -67,7 +68,7 @@ app.get("/users", (req, res) => {
 });
 
 app.delete("/users/:id", (req, res) => {
-	console.log("Delete call");
+	//console.log("Delete call");
 	const id = req.params.id
 	let result = findID(id);
 	if (result === undefined){
