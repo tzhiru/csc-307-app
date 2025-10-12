@@ -27,17 +27,21 @@ function MyApp() {
   }*/
 	function updateList(person) {
 		//only update the table if POST call succeeds
-		console.log(updateList);
+		//console.log(person);
 		postUser(person)
 		.then((response) => {
 			if(response.status != 201){
 				console.error("Post failed");
 				throw new Error(response.json());
 			}else{
+				//person = response.json()
 				return response.json();
 			}
 		})
-		.then(() => setCharacters([...characters, person]))
+		.then((data) => {
+			console.log(data);
+			setCharacters([...characters, data[0]])
+		})
 		.catch((error) => {console.log(error);})
 	}
 	

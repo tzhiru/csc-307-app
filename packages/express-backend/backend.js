@@ -22,6 +22,7 @@ const addUser = (user) => {
 	let newId = (Math.floor(Math.random()*1000000)).toString();
 	user.id = newId;
 	users["users_list"].push(user);
+	console.log(user);
 	return user;
 }
 
