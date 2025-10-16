@@ -7,7 +7,6 @@ function MyApp() {
 	const [characters, setCharacters] = useState([]);
 	
 	function removeOneCharacter(index) {
-		//const deleted = characters[index];
 		console.log("delete user");
 		const promise = fetch(`http://localhost:8000/users/${index}`,{
 			method: "DELETE"
@@ -33,7 +32,7 @@ function MyApp() {
 		})
 		.then((data) => {
 			console.log(data);
-			setCharacters([...characters, data[0]])
+			setCharacters([...characters, data])
 		})
 		.catch((error) => {console.log(error);})
 	}
