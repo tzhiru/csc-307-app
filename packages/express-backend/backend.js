@@ -41,18 +41,6 @@ app.get("/users", (req, res) => {
 
 });
 
-/*
-app.get("/users", (req, res) => {
-  const { name, job } = req.query;
-  user
-    .getUsers(name, job)
-    .then((docs) => res.send({ users_list: docs }))
-    .catch((err) => {
-      console.error("GET /users error:", err);
-      res.status(500).send("Internal server error.");
-    });
-});
-*/
 app.delete("/users/:id", (req, res) => {
 	console.log("Delete call");
 	const id = req.params.id

@@ -19,12 +19,7 @@ function MyApp() {
 				//.catch((error) => {console.log(error);})
 		});
     }
- /* function removeOneCharacter(index) {
-		const updated = characters.filter((character, i) => {
-			return i !== index;
-    });
-		setCharacters(updated);
-  }*/
+
 	function updateList(person) {
 		//only update the table if POST call succeeds
 		//console.log(person);
