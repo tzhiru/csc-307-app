@@ -13,13 +13,14 @@ mongoose
 function getUsers(name, job) {
   let promise;
   if (name === undefined && job === undefined) {
-    promise = userModel.find();
+		return userModel.find();
+  } else if (name && job) {
+		return userModel.find({name, job});
   } else if (name && !job) {
-    promise = findUserByName(name);
+		return findUserByName(name);
   } else if (job && !name) {
-    promise = findUserByJob(job);
+		return findUserByJob(job);
   }
-  return promise;
 }
 
 function findUserById(id) {

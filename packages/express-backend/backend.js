@@ -33,7 +33,7 @@ app.get("/users", (req, res) => {
 	const name = req.query.name;
 	const job = req.query.job;
 	user.getUsers(name, job).then((data) => {
-	res.send({users_list: data})
+		res.send({ users_list: data });
 	}).catch((error) => {
 		console.log(error);
 		res.status(500).send();
@@ -41,6 +41,18 @@ app.get("/users", (req, res) => {
 
 });
 
+/*
+app.get("/users", (req, res) => {
+  const { name, job } = req.query;
+  user
+    .getUsers(name, job)
+    .then((docs) => res.send({ users_list: docs }))
+    .catch((err) => {
+      console.error("GET /users error:", err);
+      res.status(500).send("Internal server error.");
+    });
+});
+*/
 app.delete("/users/:id", (req, res) => {
 	console.log("Delete call");
 	const id = req.params.id
@@ -49,10 +61,7 @@ app.delete("/users/:id", (req, res) => {
 		console.log(data);
 		if(data === undefined){
 			return res.status(404).send("User not found.");
-			}
-		else{
-			res.status(204).send("User deleted");
-			}
+		}else{res.status(204).send("User deleted");}
 	}).catch((error) => {
 		console.log(error);
 		res.status(500).send();
